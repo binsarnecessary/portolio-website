@@ -1,95 +1,136 @@
+import PHP from "../img/php.png";
+import Bootstrap from "../img/bootstrap.png";
+import Codeigniter from "../img/codeigniter.svg";
+import CSS from "../img/css.png";
+// import Docker from "../img/docker.png"
+import Express from "../img/express.webp";
+import Git from "../img/git.png";
+import Github from "../img/github.svg";
+import HTML from "../img/html.png";
+import Js from "../img/js.png";
+import Laravel from "../img/laravel.png";
+import Mongo from "../img/mongo.png";
+import MySql from "../img/mysql.png";
+import Next from "../img/neext.svg";
+import Node from "../img/node.png";
+import Postgres from "../img/postgres.jpg";
+import React from "../img/react.png";
+import Tailwind from "../img/tailwind.png";
+import Typescript from "../img/typescript.png";
+
+//image
+import Bg1 from "../img/bg/bannergede.png";
+import Bg2 from "../img/bg/bannergede.png";
+import Bg3 from "../img/bg/bankids.png";
+import Bg4 from "../img/bg/bannergede.png";
+import Bg5 from "../img/bg/fige.png";
+import Bg6 from "../img/bg/dorma.png";
+import Bg7 from "../img/bg/bannergede.png";
+import Bg8 from "../img/bg/bannergede.png";
+import Bg9 from "../img/bg/bannergede.png";
+import Bg10 from "../img/bg/bannergede.png";
+import Bg11 from "../img/bg/bannergede.png";
+import Bg12 from "../img/bg/bannergede.png";
+import Bg13 from "../img/bg/bannergede.png";
+import Bg14 from "../img/bg/bannergede.png";
+import Bg15 from "../img/bg/bannergede.png";
+
 const dataProjects = [
   {
     id: 1,
-    title: "Bengkelku",
-    category: "Web Development",
-    desc: "Bengkelku merupakan suatu platfom yang digunakan untuk mencari bengkel secara online dimana website ini merupakan project pertama saya untuk menyelesaikan tugas akhir",
-    image:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
+    title: "BDS Portal",
+    category: "Web Application",
+    desc: "A portal website that allows you to access several systems with just one login without having to log in again.",
+    image: Bg1,
     tech: [
-      { name: "HTML", icon: "🔴" },
-      { name: "CSS", icon: "🔵" },
-      { name: "JavaScript", icon: "🟡" },
-      { name: "PHP", icon: "🟣" },
-      { name: "MySQL", icon: "🔶" },
-      { name: "CodeIgniter 4", icon: "🔥" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "JavaScript", icon: Js },
+      { name: "React", icon: React },
+      { name: "MySQL", icon: MySql },
+      { name: "Node.Js", icon: Node },
+      { name: "Bootstrap", icon: Bootstrap },
     ],
     link: null,
   },
   {
     id: 2,
-    title: "Beniez",
+    title: "BDS Loan",
     category: "Web Application",
-    desc: "Platform e-commerce untuk penjualan produk lokal dengan fitur payment gateway dan tracking pengiriman",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    desc: "Loan application website for features needed for loan transactions",
+    image: Bg2,
     tech: [
-      { name: "React", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "MongoDB", icon: "🍃" },
-      { name: "Express", icon: "🚂" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "Typescript", icon: Typescript },
+      { name: "Next.Js", icon: Next },
+      { name: "PostgreSQL", icon: Postgres },
+      { name: "Tailwind", icon: Tailwind },
     ],
-    link: "https://example.com",
+    link: null,
   },
   {
     id: 3,
-    title: "Saigon Care",
-    category: "Healthcare App",
-    desc: "Aplikasi healthcare management untuk klinik dan rumah sakit dengan sistem appointment dan medical records",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
+    title: "Bank Kids",
+    category: "Education Platform ",
+    desc: "Bank kids simulation game application for early childhood financial literacy",
+    image: Bg3,
     tech: [
-      { name: "Next.js", icon: "▲" },
-      { name: "PostgreSQL", icon: "🐘" },
-      { name: "Prisma", icon: "◭" },
-      { name: "Tailwind", icon: "💨" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "Typescript", icon: Typescript },
+      { name: "Next.Js", icon: Next },
+      { name: "Tailwind", icon: Tailwind },
     ],
-    link: "https://example.com",
+    link: "https://bank-kids.vercel.app",
   },
   {
     id: 4,
-    title: "Pesantren",
+    title: "Nana Varna",
     category: "Education Platform",
-    desc: "Sistem informasi manajemen pesantren dengan fitur absensi, nilai, dan pembayaran SPP",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
+    desc: "Game Simulation is a learning media for children to recognize colors.",
+    image: Bg4,
     tech: [
-      { name: "Laravel", icon: "🔴" },
-      { name: "MySQL", icon: "🔶" },
-      { name: "Bootstrap", icon: "🟣" },
-      { name: "jQuery", icon: "📘" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "Typescript", icon: Typescript },
+      { name: "Next.Js", icon: Next },
+      { name: "Tailwind", icon: Tailwind },
     ],
     link: null,
   },
   {
     id: 5,
-    title: "ArtGallery",
-    category: "Portofolio Website",
-    desc: "Platform untuk seniman menampilkan dan menjual karya seni digital mereka",
-    image:
-      "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&h=600&fit=crop",
+    title: "Find Geometry",
+    category: "Education Platform",
+    desc: "Learning media games introduce geometry to children",
+    image: Bg5,
     tech: [
-      { name: "Vue.js", icon: "🟢" },
-      { name: "Firebase", icon: "🔥" },
-      { name: "Stripe", icon: "💳" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "Typescript", icon: Typescript },
+      { name: "Next.Js", icon: Next },
+      { name: "Tailwind", icon: Tailwind },
     ],
-    link: "https://example.com",
+    link: "https://finds-geometri.vercel.app/",
   },
   {
     id: 6,
-    title: "Dashboard Analytics",
-    category: "Data Visualization",
-    desc: "Real-time analytics dashboard dengan visualisasi data interaktif untuk business intelligence",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    title: "Dorma Mada Perkasa",
+    category: "Company Profile",
+    desc: "Company profile website according to the requests and characteristics of the company",
+    image: Bg6,
     tech: [
-      { name: "React", icon: "⚛️" },
-      { name: "D3.js", icon: "📊" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "Redis", icon: "🔴" },
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "Typescript", icon: Typescript },
+      { name: "Next.Js", icon: Next },
+      { name: "Tailwind", icon: Tailwind },
     ],
-    link: "https://example.com",
+    link: null
   },
 ];
 
-export default dataProjects;
+export default dataProjects
+
+

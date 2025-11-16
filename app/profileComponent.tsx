@@ -1,18 +1,21 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Menu, X, Code, Briefcase, User, MessageSquare, ExternalLink, Twitter, Youtube, BookOpen } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, Code, Briefcase, User, MessageSquare, ExternalLink, Twitter, Youtube, BookOpen, Laptop, Instagram, MailCheck } from 'lucide-react';
 import dataExperience from './assets/data/Experience';
 import dataProjects from './assets/data/Project';
+import Image, { StaticImageData } from 'next/image';
+import FotoProfil from './assets/img/FotoProfil.jpg'
+import dataSkills from './assets/data/Skills';
 
 interface Skill {
     name: string;
-    level: number;
+    icon: string | StaticImageData
 }
 
 interface Tech {
     name: string;
-    icon: string;
+    icon: StaticImageData;
 }
 
 interface Project {
@@ -20,7 +23,7 @@ interface Project {
     title: string;
     category: string;
     desc: string;
-    image: string;
+    image: StaticImageData;
     tech: Tech[];
     link: string | null;
 }
@@ -31,7 +34,7 @@ interface Experience {
     period: string;
     type: string;
     desc: string;
-    logo: string;
+    logo: StaticImageData;
 }
 
 export default function ProfileWebsite() {
@@ -71,32 +74,25 @@ export default function ProfileWebsite() {
         }
     };
 
-    const skills: Skill[] = [
-        { name: 'React.js', level: 90 },
-        { name: 'Next.js', level: 85 },
-        { name: 'Node.js', level: 80 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'Tailwind CSS', level: 90 },
-        { name: 'MongoDB', level: 75 }
-    ];
-
     const projects: Project[] = dataProjects
 
     const experiences: Experience[] = dataExperience
+
+    const skills: Skill[] = dataSkills
 
 
     return (
         <div className="bg-gray-50 text-gray-900 min-h-screen w-full">
             {/* Navigation */}
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
+            <nav className={`fixed w-full z-100 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
                 }`}>
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo & Name Section */}
                         <div className="flex items-center gap-3">
                             {/* Foto Profil Bulat */}
-                            <img
-                                src="URL_FOTO_ANDA_DISINI"
+                            <Image
+                                src={FotoProfil}
                                 alt="Binsar Damanik"
                                 className="w-10 h-10 rounded-full object-cover border-2 border-indigo-600"
                             />
@@ -151,7 +147,7 @@ export default function ProfileWebsite() {
             {/* Social Media Icons */}
             <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50">
                 <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/binsardamanik"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
@@ -159,23 +155,7 @@ export default function ProfileWebsite() {
                     <Linkedin size={20} />
                 </a>
                 <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
-                >
-                    <Twitter size={20} />
-                </a>
-                <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
-                >
-                    <Youtube size={20} />
-                </a>
-                <a
-                    href="https://github.com"
+                    href="https://github.com/binsarnecessary"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
@@ -183,17 +163,25 @@ export default function ProfileWebsite() {
                     <Github size={20} />
                 </a>
                 <a
-                    href="https://medium.com"
+                    href="https://www.instagram.com/binsarnecessary"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
                 >
-                    <BookOpen size={20} />
+                    <Instagram size={20} />
+                </a>
+                <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=binsar16febuary@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white hover:bg-indigo-600 text-gray-700 hover:text-white p-3 rounded-lg shadow-md transition-all duration-300 hover:scale-110"
+                >
+                    <Mail size={20} />
                 </a>
             </div>
 
             {/* Hero Section */}
-            <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+            <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20 bg-linear-to-br from-indigo-50 via-white to-purple-50">
                 <div className="max-w-6xl mx-auto w-full">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-12">
                         {/* Left Side - Text Content */}
@@ -208,9 +196,8 @@ export default function ProfileWebsite() {
                                 Im a Full Stack Web Developer
                             </p>
                             <p className="text-gray-600 mb-8 max-w-xl leading-relaxed">
-                                After completing my education at SMK Telkom Malang, I continued my academic journey at
-                                State University of Malang, majoring in Electrical Engineering and Informatics,
-                                and successfully graduated in 2023.
+                                After completing my Informatics studies at the university, I continued developing my skills in software development,
+                                focusing on modern web technologies.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button
@@ -227,21 +214,20 @@ export default function ProfileWebsite() {
                                 </button>
                             </div>
                         </div>
-                        {/* 
-                        
-                        <img 
-                            src="/path/to/your/photo.jpg" 
-                            alt="Binsar Damanik" 
-                            className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-white"
-                        />
-                        */}
+
+
 
 
                         {/* Right Side - Profile Photo */}
-                        <div className="flex-shrink-0 animate-fade-in animation-delay-200">
-                            <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-6xl md:text-7xl font-bold text-white shadow-2xl">
+                        <div className="shrink-0 animate-fade-in animation-delay-200">
+                            <Image
+                                src={FotoProfil}
+                                alt="Binsar Damanik"
+                                className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-white"
+                            />
+                            {/* <div className="w-64 h-64 md:w-80 md:h-80 bg-linear-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-6xl md:text-7xl font-bold text-white shadow-2xl">
                                 BD
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -256,13 +242,9 @@ export default function ProfileWebsite() {
                     </div>
                     <div className="text-center">
                         <p className="text-gray-600 mb-4 leading-relaxed">
-                            I am a Full Stack Web Developer with a strong foundation in both frontend and backend development.
-                            I have a strong dedication to working collaboratively in a team, and I approach every challenge
-                            with enthusiasm and courage.
-                        </p>
-                        <p className="text-gray-600 leading-relaxed">
-                            I am highly interested in continuously expanding my knowledge and skills, so I enjoy learning
-                            new things that can enhance the quality of my work.
+                            I am a Web Developer with a solid foundation in frontend and backend development.
+                            I enjoy working in collaborative environments, tackling challenges with enthusiasm,
+                            and continuously expanding my knowledge to deliver better results.
                         </p>
                     </div>
                 </div>
@@ -279,7 +261,7 @@ export default function ProfileWebsite() {
                         {experiences.map((exp, index) => (
                             <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                                 <div className="flex items-start gap-4">
-                                    <img src={exp.logo} alt={exp.company} className="w-14 h-14 rounded-lg shrink-0" />
+                                    <Image src={exp.logo} alt={exp.company} className="w-14 h-14 rounded-lg shrink-0" />
                                     <div className="flex-1 min-w-0">
                                         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
                                             <div>
@@ -301,10 +283,11 @@ export default function ProfileWebsite() {
             </section>
 
             {/* Projects Section */}
+            {/* Projects Section */}
             <section id="projects" className="py-20 px-6 bg-white">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center mb-8">
-                        <Code className="text-indigo-600 mr-3" size={28} />
+                        <Laptop className="text-indigo-600 mr-3" size={28} />
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Projects</h2>
                     </div>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -315,7 +298,7 @@ export default function ProfileWebsite() {
                                 onClick={() => setSelectedProject(project)}
                             >
                                 <div className="relative h-48 overflow-hidden bg-gray-100">
-                                    <img
+                                    <Image
                                         src={project.image}
                                         alt={project.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -332,8 +315,9 @@ export default function ProfileWebsite() {
                                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">{project.desc}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.tech.slice(0, 3).map((tech, i) => (
-                                            <span key={i} className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">
-                                                {tech.icon} {tech.name}
+                                            <span key={i} className="flex items-center gap-1 text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">
+                                                <Image src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain" />
+                                                {tech.name}
                                             </span>
                                         ))}
                                         {project.tech.length > 3 && (
@@ -357,36 +341,29 @@ export default function ProfileWebsite() {
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Skills</h2>
                     </div>
 
-                    {/* Deskripsi singkat (opsional) */}
                     <p className="text-gray-600 mb-12 max-w-2xl">
                         I work with various modern technologies for web development, both frontend and backend.
                     </p>
 
-                    {/* Grid logo skill */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
-                        {[
-                            { name: 'React.js', icon: '/icons/react.svg' },
-                            { name: 'Next.js', icon: '/icons/nextjs.svg' },
-                            { name: 'Node.js', icon: '/icons/nodejs.svg' },
-                            { name: 'TypeScript', icon: '/icons/typescript.svg' },
-                            { name: 'Tailwind CSS', icon: '/icons/tailwind.svg' },
-                            { name: 'MongoDB', icon: '/icons/mongodb.svg' },
-                            { name: 'Express.js', icon: '/icons/express.svg' },
-                            { name: 'PostgreSQL', icon: '/icons/postgresql.svg' },
-                            { name: 'Git', icon: '/icons/git.svg' },
-                            { name: 'Docker', icon: '/icons/docker.svg' },
-                            { name: 'HTML5', icon: '/icons/html.svg' },
-                            { name: 'CSS3', icon: '/icons/css.svg' },
-                        ].map((skill, index) => (
+                        {dataSkills.map((skill, index) => (
                             <div
                                 key={index}
                                 className="group bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 p-6 flex flex-col items-center justify-center"
                             >
-                                <img
-                                    src={skill.icon}
-                                    alt={skill.name}
-                                    className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
-                                />
+                                {typeof skill.icon === 'string' ? (
+                                    <Image
+                                        src={skill.icon}
+                                        alt={skill.name}
+                                        className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <Image
+                                        src={skill.icon}
+                                        alt={skill.name}
+                                        className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
+                                    />
+                                )}
                                 <p className="text-sm font-semibold text-gray-700">{skill.name}</p>
                             </div>
                         ))}
@@ -410,7 +387,7 @@ export default function ProfileWebsite() {
                                 </button>
                             </div>
 
-                            <img
+                            <Image
                                 src={selectedProject.image}
                                 alt={selectedProject.title}
                                 className="w-full h-64 object-cover rounded-lg mb-4"
@@ -444,7 +421,10 @@ export default function ProfileWebsite() {
                                 <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
                                     {selectedProject.tech.map((tech, i) => (
                                         <div key={i} className="flex flex-col items-center text-center">
-                                            <div className="text-4xl mb-2">{tech.icon}</div>
+                                            <div className="text-4xl mb-2">
+                                                <Image src={tech.icon} alt={tech.name} />
+
+                                            </div>
                                             <p className="text-xs text-gray-600">{tech.name}</p>
                                         </div>
                                     ))}
@@ -466,18 +446,18 @@ export default function ProfileWebsite() {
                         Im always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
                     </p>
                     <div className="flex justify-center flex-wrap gap-4 mb-8">
-                        <a href="mailto:your.email@example.com" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
-                            <Mail className="text-indigo-600" size={24} />
-                        </a>
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                        <a href="https://github.com/binsarnecessary" target="_blank" rel="noopener noreferrer" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
                             <Github className="text-indigo-600" size={24} />
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                        <a href="https://www.linkedin.com/in/binsardamanik" target="_blank" rel="noopener noreferrer" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
                             <Linkedin className="text-indigo-600" size={24} />
+                        </a>
+                        <a href="https://www.instagram.com/binsarnecessary" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                            <Instagram className="text-indigo-600" size={24} />
                         </a>
                     </div>
                     <a
-                        href="mailto:your.email@example.com"
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=binsar16febuary@gmail.com"
                         className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-md"
                     >
                         Send Message
@@ -488,7 +468,7 @@ export default function ProfileWebsite() {
             {/* Footer */}
             <footer className="py-8 px-6 border-t border-gray-200 bg-white">
                 <div className="max-w-6xl mx-auto text-center text-gray-500">
-                    <p>&copy; 2024 Binsar Damanik. Built with Next.js & Tailwind CSS</p>
+                    <p className='text-xs'>&copy; 2024 Binsar Damanik. Built with Next.js & Tailwind CSS</p>
                 </div>
             </footer>
 
