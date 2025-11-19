@@ -100,7 +100,7 @@ const dataProjects = [
       { name: "Next.js", icon: Next },
       { name: "Tailwind", icon: Tailwind },
     ],
-    link: null,
+    link: "https://binsar-portofolio.vercel.app",
   },
   {
     id: 6,
