@@ -1,11 +1,11 @@
 import PHP from "../img/php.png";
 import Bootstrap from "../img/bootstrap.png";
-import Codeigniter from "../img/codeigniter.svg";
+// import Codeigniter from "../img/codeigniter.svg";
 import CSS from "../img/css.png";
 // import Docker from "../img/docker.png"
 import Express from "../img/express.webp";
 import Git from "../img/git.png";
-import Github from "../img/github.svg";
+// import Github from "../img/github.svg";
 import HTML from "../img/html.png";
 import Js from "../img/js.png";
 import Laravel from "../img/laravel.png";
@@ -24,11 +24,16 @@ const dataSkills= [
   { name: "React.js", icon: React },
   { name: "Next.js", icon: Next },
   { name: "Node.js", icon: Node },
+  { name: "Express.js", icon: Express },
+  { name: "Javascript", icon: Js },
   { name: "TypeScript", icon: Typescript },
   { name: "Tailwind CSS", icon: Tailwind },
+  { name: "PHP", icon: PHP },
+  { name: "Laravel", icon: Laravel },
+  { name: "Bootstrap", icon: Bootstrap },
   { name: "MongoDB", icon: Mongo },
-  { name: "Express.js", icon: Express },
   { name: "PostgreSQL", icon: Postgres },
+  { name: "MySQL", icon: MySql },
   { name: "Git", icon: Git },
 //   { name: "Docker", icon: DockerIcon },
   { name: "HTML5", icon: HTML },
