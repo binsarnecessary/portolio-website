@@ -185,9 +185,9 @@ A two-material palette (navy ground, white enamel), plus three line colours that
 
 ### Hierarchy
 - **Display** (800, 2.25rem to 3rem at sm, line-height 1, tracking -0.025em): the name on the nameplate only.
-- **Headline** (800, 1.875rem, line-height 1, tracking 0.04em, uppercase, 4px bottom rule in current colour): section headings ("The line", "Other work", "Education", "Contact"), read as station directory boards.
+- **Headline** (800, 1.875rem, line-height 1, tracking 0.04em, uppercase, 4px bottom rule in current colour): section headings ("The line", "Projects", "Education", "Contact"), read as station directory boards.
 - **Title** (800, 1.25rem, 1.75rem leading, tracking -0.025em): station names printed on enamel plates. The timetable panel uses the same plate at 1.125rem.
-- **Title Plain** (700, 1.25rem, line-height 1.25): unplated item names on navy (other-work items, degrees). The line name on the nameplate is also 700 at 1.25rem.
+- **Title Plain** (700, 1.25rem, line-height 1.25): unplated item names on navy (project items, degrees). The line name on the nameplate is also 700 at 1.25rem.
 - **Body** (400, 1rem, line-height 1.6, tabular numerals): claims and prose, capped at 68ch. Org names step up to 700 at 1.125rem. Roles, periods and status read at 600.
 - **Label** (800, 12px, tracking 0.12em, uppercase): map furniture such as "Present" and "Key". Inline category labels ("Team", item type, the confidentiality note) use the same uppercase-tracked voice at 0.75–0.875rem, 600–700.
 - **Plate Label** (700, 1rem, tracking 0.025em): text on CTA plates.

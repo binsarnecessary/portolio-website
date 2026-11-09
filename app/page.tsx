@@ -44,7 +44,7 @@ export default function Home() {
         <StationList />
       </section>
 
-      <section id="other-work" aria-label="Other work" className="mt-(--space-6)">
+      <section id="projects" aria-label="Projects" className="mt-(--space-6)">
         <OtherWork />
       </section>
       <section id="education" aria-label="Education" className="mt-(--space-6)">

@@ -9,7 +9,7 @@ const railX = "left-[calc(1.25rem-5px)] w-[10px]";
 export default function OtherWork() {
   return (
     <div>
-      <h2 className={sectionHeading}>Other work</h2>
+      <h2 className={sectionHeading}>Projects</h2>
       <p className="text-ink-muted mt-(--space-2) text-base">
         Side projects, off the main line.
       </p>
