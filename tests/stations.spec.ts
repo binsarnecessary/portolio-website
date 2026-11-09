@@ -1,107 +1,99 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+import { careerBreak, stations } from "../app/data/profile";
 
-const panel = "#station-panel";
-const chatLink = '[data-station-link="chat"]';
+const sections = ["experience", "projects", "education", "contact"] as const;
 
-test.describe("desktop map", () => {
-  test("Tab to a station, Enter opens the panel and updates the hash", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.locator(panel)).toBeHidden();
+async function overflowX(page: Page) {
+  return page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+}
 
-    // Tab sampai fokus jatuh di stasiun pertama peta
-    for (let i = 0; i < 30; i++) {
-      await page.keyboard.press("Tab");
-      const focused = await page.evaluate(() =>
-        document.activeElement?.getAttribute("data-station-link"),
-      );
-      if (focused === "chat") break;
-    }
-    await expect(page.locator(chatLink)).toBeFocused();
+test("every station anchor exists exactly once", async ({ page }) => {
+  await page.goto("/");
+  for (const station of stations) {
+    await expect(page.locator(`#station-${station.id}`)).toHaveCount(1);
+  }
+});
 
-    await page.keyboard.press("Enter");
-    await expect(page.locator(panel)).toBeVisible();
-    await expect(page.locator(panel)).toContainText("About 200 REST endpoints");
-    await expect(page).toHaveURL(/#station-chat$/);
-    await expect(page.locator('[data-seg="chat"]')).toHaveAttribute("data-lit", "true");
-  });
+test("deep link /#station-apis scrolls the item into view below the header", async ({ page }) => {
+  await page.goto("/#station-apis");
+  const item = page.locator("#station-apis");
+  await expect(item).toBeInViewport();
+  await expect(item).toContainText("Internal APIs");
 
-  test("Esc closes the panel, returns focus and clears the hash", async ({ page }) => {
-    await page.goto("/");
-    await page.locator(chatLink).focus();
-    await page.keyboard.press("Enter");
-    await expect(page.locator(panel)).toBeVisible();
+  // header sticky tidak boleh menutupi judul item
+  const header = await page.locator("header").boundingBox();
+  const title = await item.locator("h4").boundingBox();
+  expect(header && title).toBeTruthy();
+  expect(title!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+});
 
-    await page.keyboard.press("Escape");
-    await expect(page.locator(panel)).toBeHidden();
-    await expect(page.locator(chatLink)).toBeFocused();
-    expect(new URL(page.url()).hash).toBe("");
-  });
+test("nav anchors reach their sections", async ({ page }) => {
+  await page.goto("/");
+  const nav = page.getByRole("navigation", { name: "Sections" });
+  for (const id of sections) {
+    await nav.locator(`a[href="#${id}"]`).click();
+    await expect(page).toHaveURL(new RegExp(`#${id}$`));
+    await expect(page.locator(`#${id}-h`)).toBeInViewport();
+  }
+});
 
-  test("Back restores the previous panel state", async ({ page }) => {
-    await page.goto("/");
-    await page.locator(chatLink).click();
-    await expect(page.locator(panel)).toContainText("About 200 REST endpoints");
-    await page.locator('[data-station-link="bds-loan"]').click();
-    await expect(page.locator(panel)).toContainText("loan-transaction web app");
-    await expect(page).toHaveURL(/#station-bds-loan$/);
+test("every Download CV link points at the PDF", async ({ page }) => {
+  await page.goto("/");
+  const links = page.getByRole("link", { name: "Download CV" });
+  expect(await links.count()).toBeGreaterThanOrEqual(2);
+  for (const link of await links.all()) {
+    await expect(link).toHaveAttribute("href", "/CV-Binsar-Damanik.pdf");
+    await expect(link).toHaveAttribute("download", "");
+  }
+});
 
-    await page.goBack();
-    await expect(page).toHaveURL(/#station-chat$/);
-    await expect(page.locator(panel)).toContainText("About 200 REST endpoints");
-
-    await page.goBack();
-    await expect(page.locator(panel)).toBeHidden();
-
-    await page.goForward();
-    await expect(page.locator(panel)).toBeVisible();
-  });
-
-  test("deep link /#station-chat opens on load", async ({ page }) => {
-    await page.goto("/#station-chat");
-    await expect(page.locator(panel)).toBeVisible();
-    await expect(page.locator(panel)).toContainText("Chat platform");
-    await expect(page.locator(panel)).toBeInViewport();
-  });
-
-  test("unknown hash opens nothing", async ({ page }) => {
-    await page.goto("/#station-nope");
-    await page.waitForTimeout(300);
-    await expect(page.locator(panel)).toBeHidden();
-  });
-
-  test("no duplicated station ids", async ({ page }) => {
-    await page.goto("/#station-chat");
-    await expect(page.locator(panel)).toBeVisible();
-    expect(await page.locator("#station-chat").count()).toBe(1);
-    expect(await page.locator(`${panel} [id]`).count()).toBe(0);
-  });
+test("hero CTAs are above the fold at 1440×900", async ({ page }) => {
+  await page.goto("/");
+  const hero = page.locator("#top");
+  await expect(hero.getByRole("link", { name: "Download CV" })).toBeInViewport({ ratio: 1 });
+  await expect(hero.getByRole("link", { name: "Email" })).toBeInViewport({ ratio: 1 });
 });
 
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
 
-  test("/#station-chat shows the inline case study", async ({ page }) => {
-    await page.goto("/#station-chat");
-    const station = page.locator("#station-chat");
-    await expect(station).toBeInViewport();
-    await expect(station).toContainText("Designed and built the backend");
-    await expect(station).toContainText("Outline only — employer system, no product details");
-    await expect(page.locator("#stations")).toContainText("Career break (Nov 2025 – Dec 2025)");
+  test("all claims, notes and the career break are rendered", async ({ page }) => {
+    await page.goto("/");
+    const experience = page.locator("#experience");
+    for (const station of stations) {
+      const item = page.locator(`#station-${station.id}`);
+      await expect(item).toBeVisible();
+      for (const claim of station.claims) {
+        await expect(item).toContainText(claim.text);
+      }
+    }
+    await expect(experience).toContainText(careerBreak.text);
+    await expect(experience).toContainText("Outline only — employer system, no product details");
+  });
+
+  test("/#station-apis lands on the item", async ({ page }) => {
+    await page.goto("/#station-apis");
+    await expect(page.locator("#station-apis")).toBeInViewport();
   });
 });
 
 test.describe("mobile 390px", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("no panel, the list is visible", async ({ page }) => {
-    await page.goto("/#station-chat");
-    await expect(page.locator("#line")).toBeHidden();
-    await expect(page.locator(panel)).toBeHidden();
-    await expect(page.locator("#station-chat")).toBeInViewport();
-    await expect(page.locator("#stations ol > li")).toHaveCount(10);
-    const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth - window.innerWidth,
-    );
-    expect(overflow).toBeLessThanOrEqual(0);
+  test("no horizontal overflow and hero CTAs above the fold", async ({ page }) => {
+    await page.goto("/");
+    expect(await overflowX(page)).toBeLessThanOrEqual(0);
+    const hero = page.locator("#top");
+    await expect(hero.getByRole("link", { name: "Download CV" })).toBeInViewport({ ratio: 1 });
+    await expect(hero.getByRole("link", { name: "Email" })).toBeInViewport({ ratio: 1 });
+  });
+
+  test("nav anchors reach their sections", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Sections" });
+    for (const id of sections) {
+      await nav.locator(`a[href="#${id}"]`).click();
+      await expect(page.locator(`#${id}-h`)).toBeInViewport();
+    }
   });
 });

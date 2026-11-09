@@ -1,4 +1,4 @@
-// generated from profile.json@2d9b1ce0 — do not edit
+// generated from profile.json@09faf2d8 — do not edit
 export const person = {
   "name": "Binsar Damanik",
   "full_name": "Binsar Pandapotan Damanik",
@@ -24,7 +24,12 @@ export const person = {
   "freelance_hours_per_week": [
     5,
     20
-  ]
+  ],
+  "positioning": [
+    "Backend Developer — Node.js / TypeScript (NestJS, Express)",
+    "PostgreSQL · banking & real-estate systems"
+  ],
+  "availability": "Seeking remote"
 } as const;
 
 export const stations = [
@@ -78,7 +83,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": true
+    "confidential": true,
+    "employer": "Brighton Real Estate",
+    "via": null,
+    "employment": "Contract"
   },
   {
     "id": "roleplay",
@@ -109,27 +117,56 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": true
+    "confidential": true,
+    "employer": "Brighton Real Estate",
+    "via": null,
+    "employment": "Contract"
   },
   {
-    "id": "crm",
-    "line": "personal",
-    "label": "CRM",
-    "org": "Personal project",
-    "role": "Full-stack developer",
-    "period": null,
-    "team": "solo",
-    "stack": [
-      "TypeScript",
-      "Node.js",
-      "Next.js"
-    ],
-    "claims": [],
-    "proof": {
-      "label": "Repo: crm-be",
-      "href": "https://github.com/binsarnecessary/crm-be"
+    "id": "apis",
+    "line": "trunk",
+    "label": "Internal APIs",
+    "org": "Brighton Real Estate",
+    "role": "Backend Developer",
+    "period": {
+      "start": "2026-01",
+      "end": null
     },
-    "confidential": false
+    "team": null,
+    "stack": [
+      "Node.js",
+      "TypeScript",
+      "Express",
+      "Prisma",
+      "MySQL",
+      "Redis",
+      "JWT",
+      "Swagger",
+      "Docker"
+    ],
+    "claims": [
+      {
+        "id": "c-br-apis",
+        "text": "Built and maintained REST endpoints across 9 internal Node.js / TypeScript API services (Express, Prisma, MySQL, Redis, JWT) behind the company dashboards and internal apps"
+      },
+      {
+        "id": "c-br-apis-parity",
+        "text": "Ported endpoints from the legacy PHP CMS to Node.js with matching responses, and documented service modules in Swagger / OpenAPI"
+      },
+      {
+        "id": "c-br-apis-ops",
+        "text": "Added Redis caching, Docker builds and a Node.js 24 LTS runtime upgrade to these services"
+      },
+      {
+        "id": "c-br-apis-scale",
+        "text": "About 1,200 commits across these services, linked to 160+ Jira tickets"
+      }
+    ],
+    "proof": null,
+    "confidential": true,
+    "employer": "Brighton Real Estate",
+    "via": null,
+    "employment": "Contract"
   },
   {
     "id": "bds-cs",
@@ -154,7 +191,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": "Bank Mega",
+    "via": "via Xsis Mitra Utama / IBM",
+    "employment": "Contract"
   },
   {
     "id": "bds-loan",
@@ -179,7 +219,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": "Bank Mega",
+    "via": "via Xsis Mitra Utama / IBM",
+    "employment": "Contract"
   },
   {
     "id": "bds-portal",
@@ -205,7 +248,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": "Bank Mega",
+    "via": "via Xsis Mitra Utama / IBM",
+    "employment": "Contract"
   },
   {
     "id": "xsis-academy",
@@ -233,7 +279,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": null,
+    "via": null,
+    "employment": null
   },
   {
     "id": "museakademi",
@@ -259,7 +308,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": null,
+    "via": null,
+    "employment": null
   },
   {
     "id": "arkatama",
@@ -283,7 +335,10 @@ export const stations = [
       }
     ],
     "proof": null,
-    "confidential": false
+    "confidential": false,
+    "employer": null,
+    "via": null,
+    "employment": null
   }
 ] as const;
 
@@ -310,6 +365,17 @@ export const education = [
 ] as const;
 
 export const otherWork = [
+  {
+    "id": "crm",
+    "name": "CRM (crm-be + crm-fe)",
+    "type": "Backend API + dashboard",
+    "stack": [
+      "TypeScript",
+      "Node.js",
+      "Next.js"
+    ],
+    "href": "https://github.com/binsarnecessary/crm-be"
+  },
   {
     "id": "bank-kids",
     "name": "Bank Kids",

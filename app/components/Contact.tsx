@@ -1,62 +1,55 @@
+import { Fragment } from "react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { cvHref } from "../data/cv";
 import { person } from "../data/profile";
-import Sep from "./Sep";
-import { sectionHeading } from "./stationFormat";
+import { statusChips } from "../data/person";
+import { buttonPrimary } from "./ui";
 
-const [minHours, maxHours] = person.freelance_hours_per_week;
-const availability = [
-  "Seeking remote full-time",
-  `UTC+${person.location.utc_offset}`,
-  `Freelance ${minHours}–${maxHours} h/week`,
+// tampilkan alamat tanpa skema supaya terbaca seperti teks
+const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
+
+const channels = [
+  { label: "Email", href: `mailto:${person.email}`, text: person.email },
+  { label: "LinkedIn", href: person.linkedin, text: bare(person.linkedin) },
+  { label: "GitHub", href: person.github, text: bare(person.github) },
 ];
-
-const plate =
-  "inline-flex min-h-12 items-center justify-center px-6 text-base font-bold tracking-wide";
-const textLink = "inline-flex min-h-11 items-center underline";
 
 export default function Contact() {
   return (
     <div>
-      <div className="bg-enamel text-enamel-ink border-line-trunk border-t-8 p-(--space-3)">
-        <h2 className={sectionHeading}>Contact</h2>
-        <p className="text-enamel-muted mt-(--space-2) text-base font-semibold">
-          {availability.map((item, i) => (
-            <span key={item}>
-              {i > 0 && <Sep />}
-              {item}
-            </span>
-          ))}
-        </p>
-
-        <div className="mt-(--space-3) flex flex-wrap gap-(--space-2)">
-          <a
-            href={cvHref()}
-            download
-            className={`${plate} bg-enamel-ink text-enamel hover:bg-line-trunk hover:text-enamel-ink`}
-          >
-            Download CV
-          </a>
-          <a
-            href={`mailto:${person.email}`}
-            className={`${plate} border-enamel-ink text-enamel-ink hover:bg-enamel-ink hover:text-enamel border-2`}
-          >
-            {person.email}
-          </a>
-        </div>
-
-        <p className="mt-(--space-2) flex gap-(--space-3) text-base font-semibold">
-          <a href={person.linkedin} className={textLink}>
-            LinkedIn
-          </a>
-          <a href={person.github} className={textLink}>
-            GitHub
-          </a>
-        </p>
-      </div>
-
-      <p className="text-ink-muted mt-(--space-3) text-sm">
-        © 2026 {person.name}
+      <p className="max-w-[36ch] text-2xl leading-snug font-semibold tracking-tight sm:text-3xl">
+        {statusChips.map((chip, i) => (
+          <Fragment key={chip}>
+            {i > 0 && " · "}
+            <span className="whitespace-nowrap">{chip}</span>
+          </Fragment>
+        ))}
       </p>
+
+      <dl className="divide-rule border-rule mt-8 divide-y border-y">
+        {channels.map((channel) => (
+          <div
+            key={channel.label}
+            className="grid gap-x-8 py-3 sm:grid-cols-[8rem_minmax(0,1fr)] sm:items-center"
+          >
+            <dt className="text-ink-muted text-sm">{channel.label}</dt>
+            <dd className="min-w-0">
+              <a
+                href={channel.href}
+                className="text-ink hover:text-accent inline-flex min-h-11 max-w-full items-center gap-1 font-medium break-all underline decoration-rule-strong transition-colors duration-150 hover:decoration-accent"
+              >
+                {channel.text}
+                <ArrowUpRight aria-hidden="true" className="size-4 shrink-0" strokeWidth={2} />
+              </a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <a href={cvHref()} download className={`${buttonPrimary} mt-8`}>
+        <Download aria-hidden="true" className="size-4" strokeWidth={2} />
+        Download CV
+      </a>
     </div>
   );
 }

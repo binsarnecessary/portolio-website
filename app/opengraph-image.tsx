@@ -1,12 +1,13 @@
 import { ImageResponse } from "next/og";
 import { person } from "./data/profile";
+import { positioning, statusChips } from "./data/person";
 
 export const alt = "Binsar Damanik — Backend Developer (Node.js / TypeScript)";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpengraphImage() {
-  const dots = [0, 200, 400, 600, 800, 1000];
+  const [role, ...rest] = positioning;
   return new ImageResponse(
     (
       <div
@@ -16,54 +17,37 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0b1f3a",
-          color: "#f2f6fb",
-          padding: "72px 80px",
+          background: "#ffffff",
+          color: "#0f172a",
+          padding: "80px 88px",
+          borderTop: "12px solid #4f46e5",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 96, fontWeight: 800, lineHeight: 1.05 }}>
+          <div style={{ fontSize: 96, fontWeight: 700, lineHeight: 1.05, letterSpacing: -3 }}>
             {person.name}
           </div>
-          <div
-            style={{
-              fontSize: 44,
-              fontWeight: 600,
-              marginTop: 24,
-              color: "#2fd08a",
-            }}
-          >
-            Backend Developer — Node.js / TypeScript
+          <div style={{ fontSize: 42, fontWeight: 600, marginTop: 28, color: "#4f46e5" }}>
+            {role}
           </div>
-          <div style={{ fontSize: 32, marginTop: 16, color: "#b4c3d8" }}>
-            NestJS · Express · PostgreSQL · Seeking remote (UTC+7)
-          </div>
+          <div style={{ fontSize: 30, marginTop: 16, color: "#475569" }}>{rest.join(" · ")}</div>
         </div>
-        <div style={{ display: "flex", position: "relative", height: 48 }}>
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 20,
-              width: 1040,
-              height: 8,
-              background: "#2fd08a",
-            }}
-          />
-          {dots.map((x) => (
+        <div style={{ display: "flex", gap: 16 }}>
+          {statusChips.map((chip) => (
             <div
-              key={x}
+              key={chip}
               style={{
-                position: "absolute",
-                left: x,
-                top: 6,
-                width: 36,
-                height: 36,
-                borderRadius: 18,
-                background: "#ffffff",
-                border: "6px solid #0b1f3a",
+                display: "flex",
+                fontSize: 26,
+                color: "#334155",
+                background: "#f8fafc",
+                border: "2px solid #e2e8f0",
+                borderRadius: 999,
+                padding: "8px 24px",
               }}
-            />
+            >
+              {chip}
+            </div>
           ))}
         </div>
       </div>
