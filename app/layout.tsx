@@ -1,20 +1,35 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Overpass } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const overpass = Overpass({
+  variable: "--font-overpass",
   subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const title = "Binsar Damanik — Backend Developer (Node.js / TypeScript)";
+const description =
+  "Backend developer building production APIs with Node.js / TypeScript (NestJS, Express) and PostgreSQL. Banking and real-estate systems. Seeking remote (UTC+7).";
 
 export const metadata: Metadata = {
-  title: "Profile - Binsar Damanik",
-  description: "Website Portofolio Binsar Damanik",
+  metadataBase: new URL("https://binsar-portofolio.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: "Binsar Damanik",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -24,11 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${overpass.variable} antialiased`}>{children}</body>
     </html>
   );
 }

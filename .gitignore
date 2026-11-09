@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable
+# brief & PRODUCT.md berisi strategi job hunt; repo publik, simpan lokal saja
+.impeccable/*
+!.impeccable/design.json
+PRODUCT.md
+
+# playwright
+/test-results/
+/playwright-report/
